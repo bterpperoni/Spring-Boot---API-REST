@@ -6,22 +6,6 @@ import org.springframework.context.annotation.Bean;
 
 @org.springframework.context.annotation.Configuration
 public class Configuration {
-    /*
-    @Autowired
-    private StructureRepository structureRepository;
-    private StructurePersistenceAdapter structurePersistenceAdapter = new StructurePersistenceAdapter(structureMapper,structureRepository);
-
-    @Bean
-    public StructureDatabaseHandler getStructureDatabaseHandler(){
-        return structurePersistenceAdapter ;
-    }
-
-    @Bean
-    public StructureUsesCases getStructureUsesCases(){
-        return new StructureService(structurePersistenceAdapter);
-    }
-     */
-
 
     @Bean
     public StructureMapper getStructureMapper(){

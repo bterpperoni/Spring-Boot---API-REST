@@ -4,40 +4,46 @@ import gmt.rulebook.gui.adapter.out.structure.StructureJpaEntity;
 import gmt.rulebook.gui.adapter.out.structure.StructureMapper;
 import gmt.rulebook.gui.adapter.out.structure.StructureRepository;
 import gmt.rulebook.gui.domain.model.MinimalStructure;
-import gmt.rulebook.gui.port.in.StructureUsesCases;
-import gmt.rulebook.gui.port.out.StructureDatabaseHandler;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-@Component
-@RequiredArgsConstructor
-public class StructureService implements StructureUsesCases {
+@Service
+public class StructureService {
     /*
     .var à la fin d'une méthode génère la variable que la méthode retourne
-
      */
-    @Autowired
+
     private StructureRepository structureRepository;
 
-    @Autowired
+
     private StructureMapper structureMapper;
 
-    @Override
+    public StructureService(StructureRepository structureRepository, StructureMapper structureMapper) {
+        this.structureRepository = structureRepository;
+        this.structureMapper = structureMapper;
+    }
+
     public List<MinimalStructure> getAllStructures() {
         List<StructureJpaEntity> all = structureRepository.findAll();
-        return structureMapper.mapToMinimalStructures(all);
+        return mapToMinimalStructures(all);
     }
 
-    @Override
-    public MinimalStructure getStructureById(int structureId) {
+    public MinimalStructure getStructureById(Integer structureId) {
+        Optional<StructureJpaEntity> structureJpaEntity = structureRepository.findById(structureId);
+        return structureJpaEntity.map(jpaEntity -> structureMapper.mapToMinimalStructure(jpaEntity)).orElse(null);
+
 
     }
 
-
-
+    public List<MinimalStructure> mapToMinimalStructures(List<StructureJpaEntity> structureJpaEntities){
+        List<MinimalStructure> minimalStructures = new ArrayList<>();
+        for(StructureJpaEntity structureJpaEntity : structureJpaEntities){
+            minimalStructures.add(structureMapper.mapToMinimalStructure(structureJpaEntity));
+        }
+        return minimalStructures;
+    }
 
 }

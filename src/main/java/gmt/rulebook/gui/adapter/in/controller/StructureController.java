@@ -5,6 +5,7 @@ import gmt.rulebook.gui.domain.service.StructureService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,15 +25,9 @@ public class StructureController {
                 return structureService.getAllStructures();
             }
 
-
-
-
-        /*
-        todo
-            @GetMapping("/structure/{structureId}")
-            public Structure getStructureById(@PathVariable("structureId")String structureId){
-            Structure structure = new Structure();
-                return structure;
-         */
+            @GetMapping("/getStructure/{structureId}")
+            public MinimalStructure getStructureById(@PathVariable("structureId") Integer structureId){
+                return structureService.getStructureById(structureId);
+            }
 
 }
