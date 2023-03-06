@@ -18,21 +18,17 @@ public class StructureService {
     private final StructureMapper structureMapper;
 
     public List<MinimalStructure> getAllStructures() {
+        List<MinimalStructure> minimalStructures = new ArrayList<>();
         List<StructureJpaEntity> all = structureRepository.findAll();
-        return mapToMinimalStructures(all);
+        for(StructureJpaEntity structureJpaEntity: all){
+            minimalStructures.add(structureMapper.mapToMinimalStructure(structureJpaEntity));
+        }
+        return minimalStructures;
     }
 
     public MinimalStructure getStructureById(Integer structureId) {
         Optional<StructureJpaEntity> structureJpaEntity = structureRepository.findById(structureId);
         return structureJpaEntity.map(jpaEntity -> structureMapper.mapToMinimalStructure(jpaEntity)).orElse(null);
-    }
-
-    public List<MinimalStructure> mapToMinimalStructures(List<StructureJpaEntity> structureJpaEntities){
-        List<MinimalStructure> minimalStructures = new ArrayList<>();
-        for(StructureJpaEntity structureJpaEntity : structureJpaEntities){
-            minimalStructures.add(structureMapper.mapToMinimalStructure(structureJpaEntity));
-        }
-        return minimalStructures;
     }
 
 }
