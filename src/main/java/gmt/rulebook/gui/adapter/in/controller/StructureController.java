@@ -3,11 +3,8 @@ package gmt.rulebook.gui.adapter.in.controller;
 import gmt.rulebook.gui.domain.model.MinimalStructure;
 import gmt.rulebook.gui.domain.service.StructureService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,17 +14,19 @@ import java.util.List;
 @RequestMapping("/")
 public class StructureController {
 
-    @Autowired
-    StructureService structureService;
+    private final StructureService structureService;
 
             @GetMapping("/getStructures")
-            public List<MinimalStructure> getAllStructures(){
-                return structureService.getAllStructures();
+            @CrossOrigin(origins = "http://localhost:5173", methods = {RequestMethod.GET})
+            public ResponseEntity<List<MinimalStructure>> getAllStructures(){
+                List<MinimalStructure> minimalStructures = structureService.getAllStructures();
+                return ResponseEntity.ok().body(minimalStructures);
             }
 
             @GetMapping("/getStructure/{structureId}")
-            public MinimalStructure getStructureById(@PathVariable("structureId") Integer structureId){
-                return structureService.getStructureById(structureId);
+            @CrossOrigin(origins = "http://localhost:5173", methods = {RequestMethod.GET})
+            public ResponseEntity<MinimalStructure> getStructureById(@PathVariable("structureId") Integer structureId){
+                MinimalStructure minimalStructure = structureService.getStructureById(structureId);
+                return ResponseEntity.ok().body(minimalStructure);
             }
-
 }

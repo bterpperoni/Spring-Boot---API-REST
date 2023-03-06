@@ -16,16 +16,4 @@ public interface StructureMapper {
     )
     MinimalStructure mapToMinimalStructure(StructureJpaEntity structureEntity);
 
-
-    /*
-        public List<MinimalStructure> mapToMinimalStructures(List<StructureJpaEntity> structureJpaEntities){
-        List<MinimalStructure> minimalStructures = new ArrayList<>();
-        for(StructureJpaEntity structureJpaEntity : structureJpaEntities){
-            minimalStructures.add(mapToMinimalStructure(structureJpaEntity));
-        }
-        return minimalStructures;
-    }
-     */
-
-
 }

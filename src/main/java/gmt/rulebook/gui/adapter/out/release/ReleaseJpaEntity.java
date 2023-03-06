@@ -1,13 +1,24 @@
 package gmt.rulebook.gui.adapter.out.release;
 
 import gmt.rulebook.gui.adapter.out.structure.StructureJpaEntity;
-
-
 import lombok.Data;
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Data
 @Table(name = "RELEASE_")
