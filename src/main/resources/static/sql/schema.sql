@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS RELEASE_
 CONSTRAINT PK_RELEASE_ID PRIMARY KEY (RELEASE_ID)
 --------------------------------------*/
 
-/*-----------------------------CONSTRAINT TO EXECUTE AFTER ALL THE REST----------------------------
+/*----------------------------- LATEST CONSTRAINT TO EXECUTE------------------------------------
 ALTER TABLE RELEASE_
 ADD CONSTRAINT FK_STRUCTURE_VERSION FOREIGN KEY (STRUCTURE_VERSION) REFERENCES STRUCTURE_VERSION (STRUCTURE_ID);
 -------------------------------------------------------------------------------------------------*/
@@ -76,14 +76,27 @@ INSERT INTO RELEASE_ (RELEASE_ID, DATA_, STARTING_DATE, RULEBOOK_COMPILED_BY, RU
                       START_DATE_MODIFIED_BY, START_DATE_MODIFIED_TIME, STRUCTURE_VERSION)
 VALUES ('5', 'There are no heroes in a punk rock band.', now(), 'user', now(), 'user', now(), 2);
 
+INSERT INTO RELEASE_ (RELEASE_ID, DATA_, STARTING_DATE, RULEBOOK_COMPILED_BY, RULEBOOK_COMPILED_TIME,
+                      START_DATE_MODIFIED_BY, START_DATE_MODIFIED_TIME, STRUCTURE_VERSION)
+VALUES ('6', 'One upon a time, in a free party near the city, there was a guy who was dancing with a girl.
+        They were having a good time, but suddenly the police came and they had to run away.', now(), 'user', now(), 'user', now(), 3);
+
+INSERT INTO RELEASE_ (RELEASE_ID, DATA_, STARTING_DATE, RULEBOOK_COMPILED_BY, RULEBOOK_COMPILED_TIME,
+                      START_DATE_MODIFIED_BY, START_DATE_MODIFIED_TIME, STRUCTURE_VERSION)
+VALUES ('7', 'There are no heroes in a punk rock band.', now(), 'user', now(), 'user', now(), 4);
+
 /*-----------------------------------------------------------------------------------------------*/
 
 INSERT INTO STRUCTURE_VERSION (STRUCTURE_ID, DATA_, ACTUAL_RELEASE)
-VALUES (1, 'This is some test data in a TEXT field.', '3');
+VALUES (1, 'This is some test data in a TEXT field.', '2');
 
 INSERT INTO STRUCTURE_VERSION (STRUCTURE_ID, DATA_)
 VALUES (2, 'This is second test data in a TEXT field.');
 
 INSERT INTO STRUCTURE_VERSION (STRUCTURE_ID, DATA_)
 VALUES (3, 'This is third test data in a TEXT field.');
+
+INSERT INTO STRUCTURE_VERSION (STRUCTURE_ID, DATA_)
+VALUES (4, 'It took him a while to realize that everything he decided not to change, he was actually choosing. She wanted to be rescued, but only if it was Tuesday and raining.');
+
 

@@ -21,14 +21,27 @@ public class StructureService {
         List<MinimalStructure> minimalStructures = new ArrayList<>();
         List<StructureJpaEntity> all = structureRepository.findAll();
         for(StructureJpaEntity structureJpaEntity: all){
-            minimalStructures.add(structureMapper.mapToMinimalStructure(structureJpaEntity));
+            minimalStructures.add(structureMapper.mapFromEntityToModel(structureJpaEntity));
         }
         return minimalStructures;
     }
 
     public MinimalStructure getStructureById(Integer structureId) {
         Optional<StructureJpaEntity> structureJpaEntity = structureRepository.findById(structureId);
-        return structureJpaEntity.map(jpaEntity -> structureMapper.mapToMinimalStructure(jpaEntity)).orElse(null);
+        // METHOD REFERENCE
+        return structureJpaEntity.map(structureMapper::mapFromEntityToModel).orElse(null);
+        /**
+         * The above line is equivalent to:
+         * if(structureJpaEntity.isPresent()){
+         *     return structureMapper.mapFromEntityToModel(structureJpaEntity.get());
+         * } else {
+         *     return null}
+         *
+         *          &
+         *  LAMBDA EXPRESSION
+         * return structureJpaEntity.map(structureEntity -> structureMapper.mapFromEntityToModel(structureEntity)).orElse(null);
+         */
+
     }
 
 }

@@ -1,14 +1,9 @@
 package gmt.rulebook.gui.adapter.out.release;
 
-import gmt.rulebook.gui.adapter.out.structure.StructureJpaEntity;
 import lombok.Data;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
+
+import javax.persistence.*;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
@@ -28,11 +23,11 @@ public class ReleaseJpaEntity {
     private String releaseId;
     @Column(name = "DATA_", columnDefinition = "TEXT")
     private String releaseData;
-    @Column(name = "STARTING_DATE")
+    @Column(name = "STARTING_DATE", nullable = false)
     private LocalDateTime startingDate;
-    @Column(name = "RULEBOOK_COMPILED_BY", length = 10)
+    @Column(name = "RULEBOOK_COMPILED_BY", length = 10, nullable = false)
     private String rulebookCompiledBy;
-    @Column(name = "RULEBOOK_COMPILED_TIME")
+    @Column(name = "RULEBOOK_COMPILED_TIME", nullable = false)
     private LocalDateTime rulebookCompiledTime;
     @Column(name = "RULEBOOK_VALIDATED_BY", length = 10)
     private String rulebookValidatedBy;
@@ -42,20 +37,19 @@ public class ReleaseJpaEntity {
     private String startDateModifiedBy;
     @Column(name = "START_DATE_MODIFIED_TIME", nullable = false)
     private LocalDateTime startDateModifiedTime;
-    @Column(name = "START_DATE_VALIDATED_BY", length = 10, nullable = false)
+    @Column(name = "START_DATE_VALIDATED_BY", length = 10)
     private String startDateValidatedBy;
-    @Column(name = "START_DATE_VALIDATED_TIME", nullable = false)
+    @Column(name = "START_DATE_VALIDATED_TIME")
     private LocalDateTime startDateValidatedTime;
-    @Column(name = "MADE_ACTIVE_BY", length = 10, nullable = false)
+    @Column(name = "MADE_ACTIVE_BY", length = 10)
     private String madeActiveBy;
-    @Column(name = "MADE_ACTIVE_TIME", nullable = false)
+    @Column(name = "MADE_ACTIVE_TIME")
     private LocalDateTime madeActiveTime;
-    @Column(name = "PUT_IN_HISTORIC_BY", length = 10, nullable = false)
+    @Column(name = "PUT_IN_HISTORIC_BY", length = 10)
     private String putInHistoricBy;
-    @Column(name = "PUT_IN_HISTORIC_TIME", nullable = false)
+    @Column(name = "PUT_IN_HISTORIC_TIME")
     private LocalDateTime putInHistoricTime;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "STRUCTURE_VERSION")
-    private StructureJpaEntity structureVersion;
+    @Column(name = "STRUCTURE_VERSION", nullable = false)
+    private Integer structureVersion;
 }
 
