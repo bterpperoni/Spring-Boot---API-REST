@@ -2,7 +2,7 @@ package gmt.rulebook.gui.adapter.in.controller;
 
 import gmt.rulebook.gui.domain.model.MinimalStructure;
 import gmt.rulebook.gui.domain.service.StructureService;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,11 +10,11 @@ import java.util.List;
 
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/")
 public class StructureController {
 
-    private final StructureService structureService;
+    @Autowired
+    private StructureService structureService;
 
             @GetMapping("/getStructures")
             @CrossOrigin(origins = "http://localhost:5173", methods = {RequestMethod.GET})
