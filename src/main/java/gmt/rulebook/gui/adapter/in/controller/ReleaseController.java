@@ -3,10 +3,8 @@ package gmt.rulebook.gui.adapter.in.controller;
 import gmt.rulebook.gui.domain.model.MinimalRelease;
 import gmt.rulebook.gui.domain.service.ReleaseService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,7 +16,9 @@ public class ReleaseController {
     private final ReleaseService releaseService;
 
     @GetMapping("/getAllReleasesByStructureId/{structureId}")
-    public List<MinimalRelease> getAllReleasesByStructureId(@PathVariable("structureId") Integer structureId) {
-        return releaseService.getAllReleasesByStructureId(structureId);
+    @CrossOrigin(origins = "http://localhost:5173", methods = {RequestMethod.GET})
+    public ResponseEntity<List<MinimalRelease>> getAllReleasesByStructureId(@PathVariable("structureId") Integer structureId) {
+        List<MinimalRelease> minimalReleases = releaseService.getAllReleasesByStructureId(structureId);
+        return ResponseEntity.ok().body(minimalReleases);
     }
 }

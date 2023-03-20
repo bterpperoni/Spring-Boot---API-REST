@@ -21,16 +21,4 @@ public class MinimalRelease {
     private LocalDateTime startDateModifiedTime;
     private Integer structureVersion;
 
-    /************************************
-     @Properties - for the full Release further model
-      *      private String rulebookValidatedBy;
-      *      private LocalDateTime rulebookValidatedTime;
-      *      private String startDateValidatedBy;
-      *      private LocalDateTime startDateValidatedTime;
-      *      private String madeActiveBy;
-      *      private LocalDateTime madeActiveTime;
-      *      private String putInHistoricBy;
-      *      private LocalDateTime putInHistoricTime;
-     */
-
 }

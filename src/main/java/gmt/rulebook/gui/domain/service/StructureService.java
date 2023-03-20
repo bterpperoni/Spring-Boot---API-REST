@@ -30,13 +30,13 @@ public class StructureService {
         Optional<StructureJpaEntity> structureJpaEntity = structureRepository.findById(structureId);
         // METHOD REFERENCE
         return structureJpaEntity.map(structureMapper::mapFromEntityToModel).orElse(null);
-        /**
-         * The above line is equivalent to:
+        /*
+         * The line above is equivalent to:
          * if(structureJpaEntity.isPresent()){
          *     return structureMapper.mapFromEntityToModel(structureJpaEntity.get());
          * } else {
-         *     return null}
-         *
+         *     return null
+         * }
          *          &
          *  LAMBDA EXPRESSION
          * return structureJpaEntity.map(structureEntity -> structureMapper.mapFromEntityToModel(structureEntity)).orElse(null);

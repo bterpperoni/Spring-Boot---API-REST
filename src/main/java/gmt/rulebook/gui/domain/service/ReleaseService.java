@@ -15,7 +15,6 @@ import java.util.List;
 public class ReleaseService  {
 
     private final ReleaseMapper releaseMapper;
-
     private final ReleaseRepository releaseRepository;
 
     public List<MinimalRelease> getAllReleasesByStructureId(Integer structureId) {
