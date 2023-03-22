@@ -7,6 +7,5 @@ import org.mapstruct.Mapper;
 @Mapper
 public interface ReleaseMapper extends GenericMapper<MinimalRelease, ReleaseJpaEntity> {
     MinimalRelease mapFromEntityToModel(ReleaseJpaEntity releaseEntity);
-
     ReleaseJpaEntity mapFromModelToEntity(MinimalRelease minimalRelease);
 }

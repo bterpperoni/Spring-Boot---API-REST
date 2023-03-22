@@ -25,4 +25,19 @@ public class ReleaseService  {
         }
         return minimalReleases;
     }
+
+    public MinimalRelease getReleaseById(Integer releaseId) {
+        ReleaseJpaEntity releaseJpaEntity = releaseRepository.findById(String.valueOf(releaseId)).orElse(null);
+        return releaseMapper.mapFromEntityToModel(releaseJpaEntity);
+    }
+
+    public void createRelease(MinimalRelease minimalRelease) {
+        ReleaseJpaEntity releaseJpaEntity = releaseMapper.mapFromModelToEntity(minimalRelease);
+        releaseRepository.save(releaseJpaEntity);
+        releaseMapper.mapFromEntityToModel(releaseJpaEntity);
+    }
+
+    public void deleteRelease(Integer releaseId) {
+        releaseRepository.deleteById(String.valueOf(releaseId));
+    }
 }
