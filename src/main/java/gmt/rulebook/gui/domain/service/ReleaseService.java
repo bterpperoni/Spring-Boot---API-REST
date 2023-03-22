@@ -15,11 +15,12 @@ import java.util.List;
 public class ReleaseService  {
 
     private final ReleaseMapper releaseMapper;
+
     private final ReleaseRepository releaseRepository;
 
-    public List<MinimalRelease> getAllReleasesByStructureId(Integer structureId) {
+    public List<MinimalRelease> getAllReleasesByStructureId() {
         List<MinimalRelease> minimalReleases = new ArrayList<>();
-        List<ReleaseJpaEntity> releaseJpaEntities = releaseRepository.findAllByStructureId(structureId);
+        List<ReleaseJpaEntity> releaseJpaEntities = releaseRepository.findAll();
         for(ReleaseJpaEntity releaseJpaEntity: releaseJpaEntities){
             minimalReleases.add(releaseMapper.mapFromEntityToModel(releaseJpaEntity));
         }

@@ -15,11 +15,9 @@ public class ReleaseController {
 
     private final ReleaseService releaseService;
 
-    @GetMapping("/getAllReleasesByStructureId/{structureId}")
-    @CrossOrigin(origins = "http://localhost:5173", methods = {RequestMethod.GET})
-    public ResponseEntity<List<MinimalRelease>> getAllReleasesByStructureId(@PathVariable("structureId") Integer structureId) {
-        List<MinimalRelease> minimalReleases = releaseService.getAllReleasesByStructureId(structureId);
-        return ResponseEntity.ok().body(minimalReleases);
+    @GetMapping("/getAllReleasesByStructureId")
+    public List<MinimalRelease> getAllReleasesByStructureId() {
+        return releaseService.getAllReleasesByStructureId();
     }
 
     @GetMapping("/getRelease/{releaseId}")
@@ -28,6 +26,7 @@ public class ReleaseController {
         MinimalRelease minimalRelease = releaseService.getReleaseById(releaseId);
         return ResponseEntity.ok().body(minimalRelease);
     }
+
 
     @PostMapping("/createRelease")
     @CrossOrigin(origins = "http://localhost:5173", methods = {RequestMethod.POST})
@@ -42,5 +41,4 @@ public class ReleaseController {
         releaseService.deleteRelease(releaseId);
         return ResponseEntity.ok().build();
     }
-
 }
