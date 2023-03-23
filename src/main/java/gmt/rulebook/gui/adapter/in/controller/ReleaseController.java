@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/releases")
+@RequestMapping("/")
 public class ReleaseController {
 
     private final ReleaseService releaseService;
@@ -20,23 +20,20 @@ public class ReleaseController {
         return releaseService.getAllReleasesByStructureId();
     }
 
-    @GetMapping("/getRelease/{releaseId}")
-    @CrossOrigin(origins = "http://localhost:5173", methods = {RequestMethod.GET})
+    @GetMapping("/releases/{releaseId}")
     public ResponseEntity<MinimalRelease> getReleaseById(@PathVariable("releaseId") Integer releaseId) {
         MinimalRelease minimalRelease = releaseService.getReleaseById(releaseId);
         return ResponseEntity.ok().body(minimalRelease);
     }
 
 
-    @PostMapping("/createRelease")
-    @CrossOrigin(origins = "http://localhost:5173", methods = {RequestMethod.POST})
+    @PostMapping("/releases")
     public ResponseEntity<MinimalRelease> createRelease(@RequestBody MinimalRelease minimalRelease) {
         releaseService.createRelease(minimalRelease);
         return ResponseEntity.ok().body(minimalRelease);
     }
 
-    @DeleteMapping("/deleteRelease/{releaseId}")
-    @CrossOrigin(origins = "http://localhost:5173", methods = {RequestMethod.DELETE})
+    @DeleteMapping("/releases/{releaseId}")
     public ResponseEntity<Void> deleteRelease(@PathVariable("releaseId") Integer releaseId) {
         releaseService.deleteRelease(releaseId);
         return ResponseEntity.ok().build();
