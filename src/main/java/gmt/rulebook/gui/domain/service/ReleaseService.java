@@ -18,9 +18,9 @@ public class ReleaseService  {
 
     private final ReleaseRepository releaseRepository;
 
-    public List<MinimalRelease> getAllReleasesByStructureId() {
+    public List<MinimalRelease> getAllReleasesByStructureId(Integer structureId) {
         List<MinimalRelease> minimalReleases = new ArrayList<>();
-        List<ReleaseJpaEntity> releaseJpaEntities = releaseRepository.findAll();
+        List<ReleaseJpaEntity> releaseJpaEntities = releaseRepository.findAllByStructureId(structureId);
         for(ReleaseJpaEntity releaseJpaEntity: releaseJpaEntities){
             minimalReleases.add(releaseMapper.mapFromEntityToModel(releaseJpaEntity));
         }

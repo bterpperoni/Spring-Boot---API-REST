@@ -4,7 +4,13 @@ import gmt.rulebook.gui.domain.model.MinimalRelease;
 import gmt.rulebook.gui.domain.service.ReleaseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -15,9 +21,9 @@ public class ReleaseController {
 
     private final ReleaseService releaseService;
 
-    @GetMapping("/getAllReleasesByStructureId")
-    public List<MinimalRelease> getAllReleasesByStructureId() {
-        return releaseService.getAllReleasesByStructureId();
+    @GetMapping("/getAllReleasesByStructureId/{structureId}")
+    public List<MinimalRelease> getAllReleasesByStructureId(@PathVariable("structureId") Integer structureId) {
+        return releaseService.getAllReleasesByStructureId(structureId);
     }
 
     @GetMapping("/releases/{releaseId}")
