@@ -15,4 +15,7 @@ public interface ReleaseRepository extends JpaRepository<ReleaseJpaEntity, Strin
      */
      @Query("SELECT r FROM ReleaseJpaEntity r WHERE r.structureVersion = :structureId")
      List<ReleaseJpaEntity> findAllByStructureId(@Param("structureId") Integer structureId);
+
+     @Query("SELECT MAX(r.releaseId) FROM ReleaseJpaEntity r")
+     Integer findMaxId();
 }

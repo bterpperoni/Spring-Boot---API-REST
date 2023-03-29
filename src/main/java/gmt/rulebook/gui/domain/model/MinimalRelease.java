@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -14,11 +14,11 @@ import java.time.LocalDateTime;
 public class MinimalRelease {
     private String releaseId;
     private String releaseData;
-    private LocalDateTime startingDate;
+    private Date startingDate;
     private String rulebookCompiledBy;
-    private LocalDateTime rulebookCompiledTime;
+    private Date rulebookCompiledTime;
     private String startDateModifiedBy;
-    private LocalDateTime startDateModifiedTime;
+    private Date startDateModifiedTime;
     private Integer structureVersion;
 
 }

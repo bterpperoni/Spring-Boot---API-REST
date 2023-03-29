@@ -3,8 +3,7 @@
     Test Database
     Stored on pgAdmin 4
     User : rulebook
-    Database : See
-    application.properties
+    Database : rulebook
 
  */
 ALTER USER rulebook WITH PASSWORD 'password';
@@ -15,21 +14,21 @@ DROP TABLE IF EXISTS STRUCTURE_VERSION CASCADE;
 /*-----------------------------------------------------------------------------------------------*/
 CREATE TABLE IF NOT EXISTS RELEASE_
 (
-    RELEASE_ID                VARCHAR(36) NOT NULL,
+    RELEASE_ID                VARCHAR(36) UNIQUE NOT NULL PRIMARY KEY,
     DATA_                     TEXT, /* CLOB eq. in postgres dialect */
-    STARTING_DATE             TIMESTAMP   NOT NULL,
+    STARTING_DATE             DATE   NOT NULL,
     RULEBOOK_COMPILED_BY      VARCHAR(10) NOT NULL,
-    RULEBOOK_COMPILED_TIME    TIMESTAMP   NOT NULL,
+    RULEBOOK_COMPILED_TIME    DATE   NOT NULL,
     RULEBOOK_VALIDATED_BY     VARCHAR(10),
-    RULEBOOK_VALIDATED_TIME   TIMESTAMP,
+    RULEBOOK_VALIDATED_TIME   DATE,
     START_DATE_MODIFIED_BY    VARCHAR(10) NOT NULL,
-    START_DATE_MODIFIED_TIME  TIMESTAMP   NOT NULL,
+    START_DATE_MODIFIED_TIME  DATE   NOT NULL,
     START_DATE_VALIDATED_BY   VARCHAR(10),
-    START_DATE_VALIDATED_TIME TIMESTAMP,
+    START_DATE_VALIDATED_TIME DATE,
     MADE_ACTIVE_BY            VARCHAR(10),
-    MADE_ACTIVE_TIME          TIMESTAMP,
+    MADE_ACTIVE_TIME          DATE,
     PUT_IN_HISTORIC_BY        VARCHAR(10),
-    PUT_IN_HISTORIC_TIME      TIMESTAMP,
+    PUT_IN_HISTORIC_TIME      DATE,
     STRUCTURE_VERSION         INTEGER     NOT NULL
 );
 /*-----------CONSTRAINT-----------------

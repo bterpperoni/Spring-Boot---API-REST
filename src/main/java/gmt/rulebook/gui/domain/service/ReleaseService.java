@@ -6,9 +6,11 @@ import gmt.rulebook.gui.adapter.out.release.ReleaseRepository;
 import gmt.rulebook.gui.domain.model.MinimalRelease;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -33,12 +35,26 @@ public class ReleaseService  {
     }
 
     public void createRelease(MinimalRelease minimalRelease) {
+        // Transform the received model to an entity
         ReleaseJpaEntity releaseJpaEntity = releaseMapper.mapFromModelToEntity(minimalRelease);
+        // Find if the release already exists
+        Optional<ReleaseJpaEntity> releaseEntity = releaseRepository.findById(String.valueOf(minimalRelease.getReleaseId()));
+        // If the release already exists, then add a prefix to the releaseId, otherwise, add a new releaseId
+        if(releaseEntity.isPresent()){
+            releaseJpaEntity.setReleaseId(minimalRelease.getReleaseId() + "-clone");
+        }else{
+            Integer maxReleaseId = releaseRepository.findMaxId();
+            if(maxReleaseId == null){
+                maxReleaseId = 0;
+            }else{
+                maxReleaseId++;
+            }
+            releaseJpaEntity.setReleaseId(String.valueOf(maxReleaseId));
+        }
         releaseRepository.save(releaseJpaEntity);
-        releaseMapper.mapFromEntityToModel(releaseJpaEntity);
     }
 
-    public void deleteRelease(Integer releaseId) {
+    public void deleteRelease(String releaseId) {
         releaseRepository.deleteById(String.valueOf(releaseId));
     }
 }

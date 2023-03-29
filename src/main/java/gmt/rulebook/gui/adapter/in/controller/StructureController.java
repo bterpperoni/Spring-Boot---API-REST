@@ -16,7 +16,7 @@ public class StructureController {
 
     private final StructureService structureService;
 
-            @GetMapping("/getStructures")
+            @GetMapping("/structures")
             public ResponseEntity<List<MinimalStructure>> getAllStructures(){
                 List<MinimalStructure> minimalStructures = structureService.getAllStructures();
                 return ResponseEntity.ok().body(minimalStructures);
